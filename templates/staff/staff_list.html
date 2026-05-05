@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Staff Management
+{% endblock %} {% block content %}
+<div class="container py-5">
+  <button
+    class="btn btn-primary mb-3"
+    data-bs-toggle="modal"
+    data-bs-target="#addStaffModal"
+  >
+    + Add Staff
+  </button>
+
+  <h2 class="text-center mb-4">Staff List</h2>
+
+  <table class="table table-bordered text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="staffTableBody"></tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="addStaffModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content p-4">
+      <h4 class="text-center mb-3">Add Staff Member</h4>
+
+      <form id="addStaffForm">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="name"
+          class="form-control mb-2"
+          placeholder="Full Name"
+        />
+        <input
+          type="date"
+          name="dob"
+          class="form-control mb-2"
+          placeholder="Date of Birth"
+        />
+        <input
+          type="text"
+          name="mobile"
+          class="form-control mb-2"
+          placeholder="Mobile Number"
+        />
+        <input
+          type="email"
+          name="email"
+          class="form-control mb-2"
+          placeholder="Email Address"
+        />
+
+        <label for="designation" classname="me-2 mb-0"
+          >Select Designation:</label
+        >
+        <select
+          name="designation_combo"
+          id="designation_combo"
+          class="from-control"
+          style="width: auto; min-width: 250px"
+        ></select>
+
+        <button type="submit" class="btn btn-primary w-100 mt-2">
+          Save Staff
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/staff.js' %}"></script>
+<script src="{% static 'js/staff_designation_combo.js' %}"></script>
+{% endblock %}
